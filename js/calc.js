@@ -40,6 +40,9 @@ export function Calculator() {
   function checkCurrBtnIsPoint() {
     return currentPressedButton == 'point';
   }
+  function checkCurrBtnIsDigit() {
+    return digit.indexOf(currentPressedButton) != -1;
+  }
 
   function handleButtonClick(e) {
     elem = e.target;
@@ -48,7 +51,7 @@ export function Calculator() {
     console.log(
       `(id=${elem.id} pressed) (prevBtn=${previousPressedButton}) (currBtn=${currentPressedButton})`
     );
-    console.log('checkCurrBtnIsAction ', checkCurrBtnIsPoint());
+    console.log('checkCurrBtnIsAction ', checkCurrBtnIsDigit());
   }
   self.handleButtonClick = handleButtonClick;
   return self;
