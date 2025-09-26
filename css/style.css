@@ -4,10 +4,14 @@
   box-sizing: border-box;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently upported by Chrome, Edge, Opera and Firefox */
 }
-.container * {
-  /* border: 1px solid black; */
-}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -36,8 +40,8 @@
 .util {
   padding: 20px 1px;
 }
-.clear,
-.backspace {
+#clear,
+#backspace {
   width: 200px;
   height: 70px;
   margin: 10px;
@@ -73,7 +77,7 @@
   background-color: lightblue;
   border-radius: 10px;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 30px;
 }
 
 .btn:hover {
