@@ -46,6 +46,9 @@ export function Calculator() {
   function checkTabloIsNotOneDigitZero() {
     return tablo.textContent != '0';
   }
+  function checkPrevBtnIsBackspace() {
+    return previousPressedButton == 'backspace';
+  }
 
   function handleButtonClick(e) {
     elem = e.target;
@@ -54,7 +57,7 @@ export function Calculator() {
     console.log(
       `(id=${elem.id} pressed) (prevBtn=${previousPressedButton}) (currBtn=${currentPressedButton})`
     );
-    console.log('checkCurrBtnIsAction ', checkTabloIsNotOneDigitZero());
+    console.log('checkCurrBtnIsAction ', checkPrevBtnIsBackspace());
   }
   self.handleButtonClick = handleButtonClick;
   return self;
