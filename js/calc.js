@@ -8,6 +8,8 @@ export function Calculator() {
   elem = '';
   const tablo = document.querySelector('.tablo');
   const action = ['multiply', 'subtract', 'divide', 'add'];
+  const digit = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
   function checkCurrBtnIsAction() {
     return action.indexOf(currentPressedButton) != -1;
   }
@@ -29,6 +31,9 @@ export function Calculator() {
   function checkCurrBtnIsBackspace() {
     return currentPressedButton == 'backspace';
   }
+  function checkPrevBtnIsDigit() {
+    return digit.indexOf(previousPressedButton) != -1;
+  }
 
   function handleButtonClick(e) {
     elem = e.target;
@@ -37,7 +42,7 @@ export function Calculator() {
     console.log(
       `(id=${elem.id} pressed) (prevBtn=${previousPressedButton}) (currBtn=${currentPressedButton})`
     );
-    console.log('checkCurrBtnIsAction ', checkCurrBtnIsBackspace());
+    console.log('checkCurrBtnIsAction ', checkPrevBtnIsDigit());
   }
   self.handleButtonClick = handleButtonClick;
   return self;
