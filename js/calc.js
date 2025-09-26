@@ -16,6 +16,10 @@ export function Calculator() {
   function checkCurrBtnIsEqualSign() {
     return currentPressedButton == 'eqsign';
   }
+  function checkOperationNotEmpty() {
+    return operation != '';
+  }
+
   function handleButtonClick(e) {
     elem = e.target;
     previousPressedButton = currentPressedButton;
@@ -23,7 +27,7 @@ export function Calculator() {
     console.log(
       `(id=${elem.id} pressed) (prevBtn=${previousPressedButton}) (currBtn=${currentPressedButton})`
     );
-    console.log('checkCurrBtnIsAction ', checkCurrBtnIsEqualSign());
+    console.log('checkCurrBtnIsAction ', checkOperationNotEmpty());
   }
   self.handleButtonClick = handleButtonClick;
   return self;
