@@ -55,6 +55,10 @@ export function Calculator() {
   function checkPrevBtnIsNone() {
     return previousPressedButton == 'none';
   }
+  function showPressedButton() {
+    tablo.textContent = currentPressedButton;
+    return;
+  }
 
   function handleButtonClick(e) {
     elem = e.target;
@@ -63,7 +67,7 @@ export function Calculator() {
     console.log(
       `(id=${elem.id} pressed) (prevBtn=${previousPressedButton}) (currBtn=${currentPressedButton})`
     );
-    console.log('checkCurrBtnIsAction ', checkPrevBtnIsNone());
+    console.log('checkCurrBtnIsAction ', showPressedButton());
   }
   self.handleButtonClick = handleButtonClick;
   return self;
