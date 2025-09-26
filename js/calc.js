@@ -47,11 +47,14 @@ export function Calculator() {
   function checkPrevBtnIsBackspace() {
     return previousPressedButton == 'backspace';
   }
+  function checkPrevBtnIsClearContent() {
+    return previousPressedButton == 'clear';
+  }
   function checkPrevBtnIsDigit() {
     return digit.indexOf(previousPressedButton) != -1;
   }
   function checkPrevBtnIsEqualSign() {
-    return previuosPressedButton == 'eqsign';
+    return previousPressedButton == 'eqsign';
   }
   function checkPrevBtnIsNone() {
     return previousPressedButton == 'none';
@@ -80,6 +83,7 @@ export function Calculator() {
       `(id=${elem.id} pressed) (prevBtn=${previousPressedButton}) (currBtn=${currentPressedButton})`
     );
     if (
+      (checkPrevBtnIsNone() && checkCurrBtnIsDigit()) ||
       (checkPrevBtnIsNone() && checkCurrBtnIsDigit()) ||
       (checkPrevBtnIsAction() && checkCurrBtnIsDigit()) ||
       (checkPrevBtnIsEqualSign() && checkCurrBtnIsDigit())
@@ -115,10 +119,12 @@ export function Calculator() {
       addPointToRight();
       return;
     }
-    if (
-      checkCurrBtnIsClearContent() ||
-      (checkTabloLengthEqualOneSymbol() && checkCurrBtnIsBackspace())
-    ) {
+    if (checkCurrBtnIsClearContent()) {
+      clearOperandOneAndOperation();
+      showZero();
+      return;
+    }
+    if (checkTabloLengthEqualOneSymbol() && checkCurrBtnIsBackspace()) {
       showZero();
       return;
     }
@@ -147,16 +153,20 @@ export function Calculator() {
   }
   function showResult() {
     if (operation === 'divide') {
-      return parseFloat(operandOne) / parseFloat(tablo.textContent);
+      tablo.textContent =
+        parseFloat(operandOne) / parseFloat(tablo.textContent);
     } else {
       if (operation === 'multiply') {
-        return parseFloat(operandOne) * parseFloat(tablo.textContent);
+        tablo.textContent =
+          parseFloat(operandOne) * parseFloat(tablo.textContent);
       } else {
         if (operation === 'add') {
-          return parseFloat(operandOne) + parseFloat(tablo.textContent);
+          tablo.textContent =
+            parseFloat(operandOne) + parseFloat(tablo.textContent);
         } else {
           if (operation === 'subtract') {
-            return parseFloat(operandOne) - parseFloat(tablo.textContent);
+            tablo.textContent =
+              parseFloat(operandOne) - parseFloat(tablo.textContent);
           } else {
             return undefined;
           }
