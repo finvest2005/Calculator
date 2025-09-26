@@ -59,6 +59,10 @@ export function Calculator() {
     tablo.textContent = currentPressedButton;
     return;
   }
+  function showZeroWithPoint() {
+    tablo.textContent = '0.';
+    return;
+  }
 
   function handleButtonClick(e) {
     elem = e.target;
@@ -67,7 +71,7 @@ export function Calculator() {
     console.log(
       `(id=${elem.id} pressed) (prevBtn=${previousPressedButton}) (currBtn=${currentPressedButton})`
     );
-    console.log('checkCurrBtnIsAction ', showPressedButton());
+    console.log('checkCurrBtnIsAction ', showZeroWithPoint());
   }
   self.handleButtonClick = handleButtonClick;
   return self;
