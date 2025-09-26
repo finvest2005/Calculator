@@ -102,6 +102,10 @@ export function Calculator() {
     operandOne = tablo.textContent;
     operation = currentPressedButton;
   }
+  function clearOperandOneAndOperation() {
+    operandOne = '';
+    operation = '';
+  }
 
   function handleButtonClick(e) {
     elem = e.target;
