@@ -19,6 +19,9 @@ export function Calculator() {
   function checkOperationNotEmpty() {
     return operation != '';
   }
+  function checkCurrBtnIsClearContent() {
+    return currentPressedButton == 'clear';
+  }
 
   function handleButtonClick(e) {
     elem = e.target;
@@ -27,7 +30,7 @@ export function Calculator() {
     console.log(
       `(id=${elem.id} pressed) (prevBtn=${previousPressedButton}) (currBtn=${currentPressedButton})`
     );
-    console.log('checkCurrBtnIsAction ', checkOperationNotEmpty());
+    console.log('checkCurrBtnIsAction ', checkCurrBtnIsClearContent());
   }
   self.handleButtonClick = handleButtonClick;
   return self;
