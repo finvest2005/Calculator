@@ -37,6 +37,9 @@ export function Calculator() {
   function checkTabloHasNoPoints() {
     return tablo.textContent.indexOf('.') == -1;
   }
+  function checkCurrBtnIsPoint() {
+    return currentPressedButton == 'point';
+  }
 
   function handleButtonClick(e) {
     elem = e.target;
@@ -45,7 +48,7 @@ export function Calculator() {
     console.log(
       `(id=${elem.id} pressed) (prevBtn=${previousPressedButton}) (currBtn=${currentPressedButton})`
     );
-    console.log('checkCurrBtnIsAction ', checkTabloHasNoPoints());
+    console.log('checkCurrBtnIsAction ', checkCurrBtnIsPoint());
   }
   self.handleButtonClick = handleButtonClick;
   return self;
