@@ -26,6 +26,9 @@ export function Calculator() {
   function checkTabloLengthEqualOneSymbol() {
     return tablo.textContent.length == 1;
   }
+  function checkCurrBtnIsBackspace() {
+    return currentPressedButton == 'backspace';
+  }
 
   function handleButtonClick(e) {
     elem = e.target;
@@ -34,7 +37,7 @@ export function Calculator() {
     console.log(
       `(id=${elem.id} pressed) (prevBtn=${previousPressedButton}) (currBtn=${currentPressedButton})`
     );
-    console.log('checkCurrBtnIsAction ', checkTabloLengthEqualOneSymbol());
+    console.log('checkCurrBtnIsAction ', checkCurrBtnIsBackspace());
   }
   self.handleButtonClick = handleButtonClick;
   return self;
