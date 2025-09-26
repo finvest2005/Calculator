@@ -10,6 +10,9 @@ export function Calculator() {
   function checkCurrBtnIsAction() {
     return action.indexOf(currentPressedButton) != -1;
   }
+  function checkPrevBtnIsAction() {
+    return action.indexOf(previousPressedButton) != -1;
+  }
   function handleButtonClick(e) {
     elem = e.target;
     previousPressedButton = currentPressedButton;
@@ -17,7 +20,7 @@ export function Calculator() {
     console.log(
       `(id=${elem.id} pressed) (prevBtn=${previousPressedButton}) (currBtn=${currentPressedButton})`
     );
-    console.log('checkCurrBtnIsAction ', checkCurrBtnIsAction());
+    console.log('checkCurrBtnIsAction ', checkPrevBtnIsAction());
   }
   self.handleButtonClick = handleButtonClick;
   return self;
