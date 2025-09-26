@@ -52,6 +52,9 @@ export function Calculator() {
   function checkPrevBtnIsPoint() {
     return previousPressedButton == 'point';
   }
+  function checkPrevBtnIsNone() {
+    return previousPressedButton == 'none';
+  }
 
   function handleButtonClick(e) {
     elem = e.target;
@@ -60,7 +63,7 @@ export function Calculator() {
     console.log(
       `(id=${elem.id} pressed) (prevBtn=${previousPressedButton}) (currBtn=${currentPressedButton})`
     );
-    console.log('checkCurrBtnIsAction ', checkPrevBtnIsPoint());
+    console.log('checkCurrBtnIsAction ', checkPrevBtnIsNone());
   }
   self.handleButtonClick = handleButtonClick;
   return self;
