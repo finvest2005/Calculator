@@ -9,107 +9,66 @@ export function Calculator() {
   const tablo = document.querySelector('.tablo');
   const action = ['multiply', 'subtract', 'divide', 'add'];
   const digit = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-
-  function checkCurrBtnIsAction() {
-    return action.indexOf(currentPressedButton) != -1;
-  }
-  function checkPrevBtnIsAction() {
-    return action.indexOf(previousPressedButton) != -1;
-  }
-  function checkCurrBtnIsEqualSign() {
-    return currentPressedButton == 'eqsign';
-  }
-  function checkOperationNotEmpty() {
-    return operation != '';
-  }
-  function checkCurrBtnIsClearContent() {
-    return currentPressedButton == 'clear';
-  }
-  function checkTabloLengthEqualOneSymbol() {
-    return tablo.textContent.length == 1;
-  }
-  function checkCurrBtnIsBackspace() {
-    return currentPressedButton == 'backspace';
-  }
-  function checkPrevBtnIsDigit() {
-    return digit.indexOf(previousPressedButton) != -1;
-  }
-  function checkTabloHasNoPoints() {
-    return tablo.textContent.indexOf('.') == -1;
-  }
-  function checkCurrBtnIsPoint() {
-    return currentPressedButton == 'point';
-  }
-  function checkCurrBtnIsDigit() {
-    return digit.indexOf(currentPressedButton) != -1;
-  }
-  function checkTabloIsNotOneDigitZero() {
-    return tablo.textContent != '0';
-  }
-  function checkPrevBtnIsBackspace() {
-    return previousPressedButton == 'backspace';
-  }
-  function checkPrevBtnIsPoint() {
-    return previousPressedButton == 'point';
-  }
-  function checkPrevBtnIsNone() {
-    return previousPressedButton == 'none';
-  }
-  function showPressedButton() {
-    tablo.textContent = currentPressedButton;
-    return;
-  }
-  function showZeroWithPoint() {
-    tablo.textContent = '0.';
+  function addPointToRight() {
+    tablo.textContent = tablo.textContent + '.';
     return;
   }
   function addPressedButtonToRight() {
     tablo.textContent = tablo.textContent + currentPressedButton;
     return;
   }
-  function removeOneDigitFromRight() {
-    tablo.textContent = tablo.textContent.slice(0, -1);
-    return;
+  function checkCurrBtnIsAction() {
+    return action.indexOf(currentPressedButton) != -1;
   }
-  function addPointToRight() {
-    tablo.textContent = tablo.textContent + '.';
-    return;
+  function checkCurrBtnIsBackspace() {
+    return currentPressedButton == 'backspace';
   }
-  function showZero() {
-    tablo.textContent = '0';
-    return;
+  function checkCurrBtnIsClearContent() {
+    return currentPressedButton == 'clear';
   }
-  function showResult() {
-    if (operation === 'divide') {
-      return parseFloat(operandOne) / parseFloat(tablo.textContent);
-    } else {
-      if (operation === 'multiply') {
-        return parseFloat(operandOne) * parseFloat(tablo.textContent);
-      } else {
-        if (operation === 'add') {
-          return parseFloat(operandOne) + parseFloat(tablo.textContent);
-        } else {
-          if (operation === 'subtract') {
-            return parseFloat(operandOne) - parseFloat(tablo.textContent);
-          } else {
-            return undefined;
-          }
-        }
-      }
-    }
+  function checkCurrBtnIsDigit() {
+    return digit.indexOf(currentPressedButton) != -1;
   }
-  function writeOperandOneAndOperation() {
-    operandOne = tablo.textContent;
-    operation = currentPressedButton;
+  function checkCurrBtnIsEqualSign() {
+    return currentPressedButton == 'eqsign';
+  }
+  function checkCurrBtnIsPoint() {
+    return currentPressedButton == 'point';
+  }
+  function checkOperationNotEmpty() {
+    return operation != '';
+  }
+  function checkOperationEmpty() {
+    return operation == '';
+  }
+  function checkPrevBtnIsAction() {
+    return action.indexOf(previousPressedButton) != -1;
+  }
+  function checkPrevBtnIsBackspace() {
+    return previousPressedButton == 'backspace';
+  }
+  function checkPrevBtnIsDigit() {
+    return digit.indexOf(previousPressedButton) != -1;
+  }
+  function checkPrevBtnIsNone() {
+    return previousPressedButton == 'none';
+  }
+  function checkPrevBtnIsPoint() {
+    return previousPressedButton == 'point';
+  }
+  function checkTabloHasNoPoints() {
+    return tablo.textContent.indexOf('.') == -1;
+  }
+  function checkTabloIsNotOneDigitZero() {
+    return tablo.textContent != '0';
+  }
+  function checkTabloLengthEqualOneSymbol() {
+    return tablo.textContent.length == 1;
   }
   function clearOperandOneAndOperation() {
     operandOne = '';
     operation = '';
   }
-  function writeOperation() {
-    operation = currentPressedButton;
-  }
-
   function handleButtonClick(e) {
     elem = e.target;
     previousPressedButton = currentPressedButton;
@@ -117,7 +76,104 @@ export function Calculator() {
     console.log(
       `(id=${elem.id} pressed) (prevBtn=${previousPressedButton}) (currBtn=${currentPressedButton})`
     );
-    console.log('checkCurrBtnIsAction ', showResult());
+    if (
+      (checkPrevBtnIsNone() && checkCurrBtnIsDigit()) ||
+      (checkPrevBtnIsAction() && checkCurrBtnIsDigit())
+    ) {
+      showPressedButton();
+      return;
+    }
+    if (checkPrevBtnIsAction() && checkCurrBtnIsPoint()) {
+      showZeroWithPoint();
+      return;
+    }
+    if (
+      (checkPrevBtnIsDigit() &&
+        checkTabloIsNotOneDigitZero() &&
+        checkCurrBtnIsDigit()) ||
+      (checkPrevBtnIsPoint() && checkCurrBtnIsDigit()) ||
+      (checkPrevBtnIsBackspace() &&
+        checkTabloIsNotOneDigitZero() &&
+        checkCurrBtnIsDigit())
+    ) {
+      addPressedButtonToRight();
+      return;
+    }
+    if (checkPrevBtnIsDigit() && checkCurrBtnIsBackspace()) {
+      removeOneDigitFromRight();
+      return;
+    }
+    if (
+      checkPrevBtnIsDigit() &&
+      checkTabloHasNoPoints() &&
+      checkCurrBtnIsPoint()
+    ) {
+      addPointToRight();
+      return;
+    }
+    if (
+      checkCurrBtnIsClearContent() ||
+      (checkTabloLengthEqualOneSymbol() && checkCurrBtnIsBackspace())
+    ) {
+      showZero();
+      return;
+    }
+    if (checkCurrBtnIsAction() && checkOperationNotEmpty()) {
+      showResult();
+      writeOperandOneAndOperation();
+      return;
+    }
+    if (checkCurrBtnIsEqualSign() && checkOperationNotEmpty()) {
+      showResult();
+      clearOperandOneAndOperation();
+      return;
+    }
+  }
+  function removeOneDigitFromRight() {
+    tablo.textContent = tablo.textContent.slice(0, -1);
+    return;
+  }
+  function showPressedButton() {
+    tablo.textContent = currentPressedButton;
+    return;
+  }
+  function showResult() {
+    if (operation === 'divide') {
+      tablo.textContent =
+        parseFloat(operandOne) / parseFloat(tablo.textContent);
+    } else {
+      if (operation === 'multiply') {
+        tablo.textContent =
+          parseFloat(operandOne) * parseFloat(tablo.textContent);
+      } else {
+        if (operation === 'add') {
+          tablo.textContent =
+            parseFloat(operandOne) + parseFloat(tablo.textContent);
+        } else {
+          if (operation === 'subtract') {
+            tablo.textContent =
+              parseFloat(operandOne) - parseFloat(tablo.textContent);
+          } else {
+            return undefined;
+          }
+        }
+      }
+    }
+  }
+  function showZero() {
+    tablo.textContent = '0';
+    return;
+  }
+  function showZeroWithPoint() {
+    tablo.textContent = '0.';
+    return;
+  }
+  function writeOperandOneAndOperation() {
+    operandOne = tablo.textContent;
+    operation = currentPressedButton;
+  }
+  function writeOperation() {
+    operation = currentPressedButton;
   }
   self.handleButtonClick = handleButtonClick;
   return self;
