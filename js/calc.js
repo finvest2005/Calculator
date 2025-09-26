@@ -98,6 +98,10 @@ export function Calculator() {
       }
     }
   }
+  function writeOperandOneAndOperation() {
+    operandOne = tablo.textContent;
+    operation = currentPressedButton;
+  }
 
   function handleButtonClick(e) {
     elem = e.target;
