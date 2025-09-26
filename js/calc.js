@@ -49,6 +49,9 @@ export function Calculator() {
   function checkPrevBtnIsBackspace() {
     return previousPressedButton == 'backspace';
   }
+  function checkPrevBtnIsPoint() {
+    return previousPressedButton == 'point';
+  }
 
   function handleButtonClick(e) {
     elem = e.target;
@@ -57,7 +60,7 @@ export function Calculator() {
     console.log(
       `(id=${elem.id} pressed) (prevBtn=${previousPressedButton}) (currBtn=${currentPressedButton})`
     );
-    console.log('checkCurrBtnIsAction ', checkPrevBtnIsBackspace());
+    console.log('checkCurrBtnIsAction ', checkPrevBtnIsPoint());
   }
   self.handleButtonClick = handleButtonClick;
   return self;
