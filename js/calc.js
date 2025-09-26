@@ -106,6 +106,9 @@ export function Calculator() {
     operandOne = '';
     operation = '';
   }
+  function writeOperation() {
+    operation = currentPressedButton;
+  }
 
   function handleButtonClick(e) {
     elem = e.target;
