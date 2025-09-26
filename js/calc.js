@@ -79,6 +79,25 @@ export function Calculator() {
     tablo.textContent = '0';
     return;
   }
+  function showResult() {
+    if (operation === 'divide') {
+      return parseFloat(operandOne) / parseFloat(tablo.textContent);
+    } else {
+      if (operation === 'multiply') {
+        return parseFloat(operandOne) * parseFloat(tablo.textContent);
+      } else {
+        if (operation === 'add') {
+          return parseFloat(operandOne) + parseFloat(tablo.textContent);
+        } else {
+          if (operation === 'subtract') {
+            return parseFloat(operandOne) - parseFloat(tablo.textContent);
+          } else {
+            return undefined;
+          }
+        }
+      }
+    }
+  }
 
   function handleButtonClick(e) {
     elem = e.target;
@@ -87,7 +106,7 @@ export function Calculator() {
     console.log(
       `(id=${elem.id} pressed) (prevBtn=${previousPressedButton}) (currBtn=${currentPressedButton})`
     );
-    console.log('checkCurrBtnIsAction ', showZero());
+    console.log('checkCurrBtnIsAction ', showResult());
   }
   self.handleButtonClick = handleButtonClick;
   return self;
