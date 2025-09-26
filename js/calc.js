@@ -67,6 +67,10 @@ export function Calculator() {
     tablo.textContent = tablo.textContent + currentPressedButton;
     return;
   }
+  function removeOneDigitFromRight() {
+    tablo.textContent = tablo.textContent.slice(0, -1);
+    return;
+  }
 
   function handleButtonClick(e) {
     elem = e.target;
@@ -75,7 +79,7 @@ export function Calculator() {
     console.log(
       `(id=${elem.id} pressed) (prevBtn=${previousPressedButton}) (currBtn=${currentPressedButton})`
     );
-    console.log('checkCurrBtnIsAction ', addPressedButtonToRight());
+    console.log('checkCurrBtnIsAction ', removeOneDigitFromRight());
   }
   self.handleButtonClick = handleButtonClick;
   return self;
