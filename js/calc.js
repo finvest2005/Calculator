@@ -63,6 +63,10 @@ export function Calculator() {
     tablo.textContent = '0.';
     return;
   }
+  function addPressedButtonToRight() {
+    tablo.textContent = tablo.textContent + currentPressedButton;
+    return;
+  }
 
   function handleButtonClick(e) {
     elem = e.target;
@@ -71,7 +75,7 @@ export function Calculator() {
     console.log(
       `(id=${elem.id} pressed) (prevBtn=${previousPressedButton}) (currBtn=${currentPressedButton})`
     );
-    console.log('checkCurrBtnIsAction ', showZeroWithPoint());
+    console.log('checkCurrBtnIsAction ', addPressedButtonToRight());
   }
   self.handleButtonClick = handleButtonClick;
   return self;
