@@ -34,6 +34,9 @@ export function Calculator() {
   function checkPrevBtnIsDigit() {
     return digit.indexOf(previousPressedButton) != -1;
   }
+  function checkTabloHasNoPoints() {
+    return tablo.textContent.indexOf('.') == -1;
+  }
 
   function handleButtonClick(e) {
     elem = e.target;
@@ -42,7 +45,7 @@ export function Calculator() {
     console.log(
       `(id=${elem.id} pressed) (prevBtn=${previousPressedButton}) (currBtn=${currentPressedButton})`
     );
-    console.log('checkCurrBtnIsAction ', checkPrevBtnIsDigit());
+    console.log('checkCurrBtnIsAction ', checkTabloHasNoPoints());
   }
   self.handleButtonClick = handleButtonClick;
   return self;
