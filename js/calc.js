@@ -68,6 +68,9 @@ export function Calculator() {
   function checkTabloIsNotOneDigitZero() {
     return tablo.textContent != '0';
   }
+  function checkTabloIsOneDigitZero() {
+    return tablo.textContent == '0';
+  }
   function checkTabloLengthEqualOneSymbol() {
     return tablo.textContent.length == 1;
   }
@@ -80,20 +83,23 @@ export function Calculator() {
     previousPressedButton = currentPressedButton;
     currentPressedButton = elem.id;
     console.log(
-      `(id=${elem.id} pressed) (prevBtn=${previousPressedButton}) (currBtn=${currentPressedButton})`
+      `Before: (id=${elem.id} pressed) (prevBtn=${previousPressedButton}) (currBtn=${currentPressedButton}) (operandOne=${operandOne}) (operation=${operation})`
     );
     if (
-      (checkPrevBtnIsNone() && checkCurrBtnIsDigit()) ||
+      (checkPrevBtnIsClearContent() && checkCurrBtnIsDigit()) ||
       (checkPrevBtnIsNone() && checkCurrBtnIsDigit()) ||
       (checkPrevBtnIsAction() && checkCurrBtnIsDigit()) ||
-      (checkPrevBtnIsEqualSign() && checkCurrBtnIsDigit())
+      (checkPrevBtnIsEqualSign() && checkCurrBtnIsDigit()) ||
+      (checkPrevBtnIsBackspace() &&
+        checkCurrBtnIsDigit() &&
+        checkTabloIsOneDigitZero())
     ) {
       showPressedButton();
-      return;
+      console.log('1');
     }
     if (checkPrevBtnIsAction() && checkCurrBtnIsPoint()) {
       showZeroWithPoint();
-      return;
+      console.log('2');
     }
     if (
       (checkPrevBtnIsDigit() &&
@@ -105,10 +111,14 @@ export function Calculator() {
         checkCurrBtnIsDigit())
     ) {
       addPressedButtonToRight();
-      return;
+      console.log('3');
     }
-    if (checkPrevBtnIsDigit() && checkCurrBtnIsBackspace()) {
+    if (
+      (checkPrevBtnIsDigit() || checkCurrBtnIsPoint) &&
+      checkCurrBtnIsBackspace()
+    ) {
       removeOneDigitFromRight();
+      console.log('4');
       return;
     }
     if (
@@ -117,35 +127,48 @@ export function Calculator() {
       checkCurrBtnIsPoint()
     ) {
       addPointToRight();
-      return;
+      console.log('5');
     }
     if (checkCurrBtnIsClearContent()) {
       clearOperandOneAndOperation();
       showZero();
-      return;
+      console.log('6');
     }
     if (checkTabloLengthEqualOneSymbol() && checkCurrBtnIsBackspace()) {
       showZero();
-      return;
+      console.log('7');
     }
-    if (checkCurrBtnIsAction() && checkOperationEmpty()) {
-      writeOperandOneAndOperation();
-      return;
-    }
-    if (checkCurrBtnIsAction() && checkOperationNotEmpty()) {
-      writeOperandOneAndOperation();
-      showResult();
-      return;
+    if (checkCurrBtnIsAction()) {
+      if (checkOperationEmpty()) {
+        writeOperandOneAndOperation();
+        console.log('8');
+      } else {
+        showResult();
+        writeOperandOneAndOperation();
+        console.log('9');
+      }
     }
     if (checkCurrBtnIsEqualSign() && checkOperationNotEmpty()) {
       showResult();
       clearOperandOneAndOperation();
-      return;
+      console.log('10');
     }
+    if (checkCurrBtnIsAction() && checkPrevBtnIsAction()) {
+      writeOperation();
+      console.log('11');
+    }
+    console.log(
+      `After: (id=${elem.id} pressed) (prevBtn=${previousPressedButton}) (currBtn=${currentPressedButton}) (operandOne=${operandOne}) (operation=${operation})`
+    );
   }
   function removeOneDigitFromRight() {
-    tablo.textContent = tablo.textContent.slice(0, -1);
-    return;
+    if (checkTabloLengthEqualOneSymbol()) {
+      tablo.textContent = '0';
+      return;
+    } else {
+      tablo.textContent = tablo.textContent.slice(0, -1);
+      return;
+    }
   }
   function showPressedButton() {
     tablo.textContent = currentPressedButton;
